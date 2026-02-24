@@ -30,12 +30,18 @@ RUN apt-get update && \
     wget -q  https://github.com/justjanne/powerline-go/releases/download/v1.24/powerline-go-linux-"$(dpkg --print-architecture)" -O /usr/local/bin/powerline-shell && \
     chmod a+x /usr/local/bin/powerline-shell
 
-# install Miniforge
-RUN wget -O /tmp/Miniforge3.sh "https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-$(uname)-$(uname -m).sh" && \
-    bash /tmp/Miniforge3.sh -b -p "/opt/conda" &&  rm /tmp/Miniforge3.sh
-RUN . /opt/conda/etc/profile.d/conda.sh
-# make conda install writable
-RUN chmod -R 777 /opt/conda
+# Install uv directly from the official image
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
+
+# Install Python 3.12 and create the global virtual environment
+RUN uv python install 3.12 && \
+    uv venv /opt/venv --python 3.12
+
+# Make the venv writable for users so they can install their own packages at runtime
+RUN chmod -R 777 /opt/venv
+
+# 4. Set PATH so the venv is the default Python for all non-interactive commands
+ENV PATH="/opt/venv/bin:$PATH"
 
 # setup ssh
 RUN ssh-keygen -A
