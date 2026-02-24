@@ -165,7 +165,7 @@ pydantic
 pydantic_core
 Pygments
 pyparsing
-PySide6==6.9.2
+PySide6==6.10.2
 PySocks
 python-dateutil
 python-dotenv==1.2.1
@@ -194,7 +194,7 @@ sentencepiece==0.2.1
 sentry-sdk
 setproctitle
 shellingham==1.5.4
-shiboken6==6.9.2
+shiboken6==6.10.2
 shtab==1.7.2
 simple-websocket==1.1.0
 six
