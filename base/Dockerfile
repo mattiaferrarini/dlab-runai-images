@@ -33,9 +33,9 @@ RUN apt-get update && \
 # Install uv directly from the official image
 COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
 
-# Install Python 3.12 and create the global virtual environment
-RUN uv python install 3.12 && \
-    uv venv /opt/venv --python 3.12
+# Install Python 3.11 and create the global virtual environment
+RUN uv python install 3.11 && \
+    uv venv /opt/venv --python 3.11
 
 # Make the venv writable for users so they can install their own packages at runtime
 RUN chmod -R 777 /opt/venv
