@@ -34,7 +34,7 @@ rs() {
     else
         pvc_name="runai-dlab-{GASPAR_NAME}-scratch"
     fi
-    runai_context submit -i ghcr.io/jkminder/dlab-runai-images/pytorch:master --pvc "$pvc_name:/mnt" "$@"
+    runai_context submit -i ghcr.io/mattiaferrarini/dlab-runai-images/pytorch:master --pvc "$pvc_name:/mnt" "$@"
 }
 
 alias rrcp="runai config cluster rcp-caas-prod && set_runai_context rcp"

@@ -77,5 +77,8 @@ jobs:
           context: .
           file: ${{ env.CONTEXT }}/Dockerfile
           push: true
+          pull: true # Force Docker to download the freshly updated :master tag
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+          build-args: |
+            BASE_IMAGE=${{ env.REGISTRY }}/${{ github.repository }}/base:master
