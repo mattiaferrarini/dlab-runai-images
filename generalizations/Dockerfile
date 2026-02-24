@@ -1,21 +1,12 @@
-# Retain your original base image
 ARG BASE_IMAGE="ghcr.io/jkminder/dlab-runai-images/base:master"
 FROM ${BASE_IMAGE}
 
-# Install uv directly from the official Astral image
-COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
-
-# Copy requirements.txt 
+# Copy requirements
 COPY generalizations/requirements.txt /tmp/requirements.txt
 
-# Create a virtual environment and install dependencies using uv
-RUN uv venv /opt/venv --python 3.12 && \
-    . /opt/venv/bin/activate && \
-    uv pip install --no-cache -r /tmp/requirements.txt && \
+# Install dependencies directly into the base image's venv
+RUN uv pip install --no-cache -r /tmp/requirements.txt && \
     rm /tmp/requirements.txt
-
-# Activate the virtual environment for all runtime container commands
-ENV PATH="/opt/venv/bin:$PATH"
 
 # Install ngrok
 RUN curl -s https://ngrok-agent.s3.amazonaws.com/ngrok.asc \
