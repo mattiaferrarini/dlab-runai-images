@@ -33,12 +33,16 @@ RUN apt-get update && \
 # Install uv directly from the official image
 COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
 
+# Tell uv to install Python binaries into a globally accessible folder
+ENV UV_PYTHON_INSTALL_DIR="/opt/uv_python"
+
 # Install Python 3.11 and create the global virtual environment
 RUN uv python install 3.11 && \
     uv venv /opt/venv --python 3.11
 
-# Make the venv writable for users so they can install their own packages at runtime
-RUN chmod -R 777 /opt/venv
+# Make the venv and the base Python binaries readable/executable for everyone
+RUN chmod -R 777 /opt/venv && \
+    chmod -R 755 /opt/uv_python
 
 # 4. Set PATH so the venv is the default Python for all non-interactive commands
 ENV PATH="/opt/venv/bin:$PATH"
