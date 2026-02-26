@@ -1,0 +1,8 @@
+loguru==0.7.3
+omegaconf==2.3.0
+openai
+python-dotenv==1.2.1
+PyYAML
+torch==2.8.0
+tqdm
+vllm
