@@ -1,0 +1,16 @@
+python-dotenv
+datasets
+torch
+transformers>=5.2.0
+peft
+trl
+openai
+vllm
+openrouter
+omegaconf
+pyyaml
+accelerate
+loguru
+tqdm
+pathlib
+asyncio
