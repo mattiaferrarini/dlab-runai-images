@@ -1,11 +1,11 @@
 python-dotenv
 datasets
 torch
-transformers>=5.2.0
+transformers>=4.56.0,<5
 peft
 trl
 openai
-vllm
+vllm>=0.16.0
 openrouter
 omegaconf
 pyyaml
