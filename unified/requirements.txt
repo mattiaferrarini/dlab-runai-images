@@ -3,6 +3,7 @@
 accelerate==1.12.0
     # via
     #   -r requirements.in
+    #   nnsight
     #   peft
     #   trl
 aiohappyeyeballs==2.6.1
@@ -35,7 +36,11 @@ anyio==4.12.1
 apache-tvm-ffi==0.1.9
     # via flashinfer-python
 astor==0.8.1
-    # via depyf
+    # via
+    #   depyf
+    #   nnsight
+asttokens==3.0.1
+    # via stack-data
 asyncio==4.0.0
     # via -r requirements.in
 attrs==25.4.0
@@ -43,6 +48,8 @@ attrs==25.4.0
     #   aiohttp
     #   jsonschema
     #   referencing
+bidict==0.23.1
+    # via python-socketio
 blake3==1.0.8
     # via vllm
 cachetools==7.0.1
@@ -67,7 +74,9 @@ click==8.3.1
     #   typer
     #   uvicorn
 cloudpickle==3.1.2
-    # via vllm
+    # via
+    #   nnsight
+    #   vllm
 compressed-tensors==0.13.0
     # via vllm
 cryptography==46.0.5
@@ -87,6 +96,8 @@ datasets==4.6.1
     # via
     #   -r requirements.in
     #   trl
+decorator==5.2.1
+    # via ipython
 depyf==0.20.0
     # via vllm
 dill==0.4.0
@@ -112,6 +123,8 @@ email-validator==2.3.0
     # via
     #   fastapi
     #   pydantic
+executing==2.2.1
+    # via stack-data
 fastapi==0.135.0
     # via
     #   model-hosting-container-standards
@@ -153,6 +166,7 @@ h11==0.16.0
     # via
     #   httpcore
     #   uvicorn
+    #   wsproto
 hf-xet==1.3.2
     # via huggingface-hub
 httpcore==1.0.9
@@ -169,6 +183,7 @@ httpx==0.28.1
     #   fastapi-cloud-cli
     #   mcp
     #   model-hosting-container-standards
+    #   nnsight
     #   openai
     #   openrouter
 httpx-sse==0.4.3
@@ -191,6 +206,12 @@ ijson==3.5.0
     # via vllm
 interegular==0.3.3
     # via lm-format-enforcer
+ipython==9.11.0
+    # via nnsight
+ipython-pygments-lexers==1.1.1
+    # via ipython
+jedi==0.19.2
+    # via ipython
 jinja2==3.1.6
     # via
     #   fastapi
@@ -224,6 +245,8 @@ markdown-it-py==4.0.0
     # via rich
 markupsafe==3.0.3
     # via jinja2
+matplotlib-inline==0.2.1
+    # via ipython
 mcp==1.26.0
     # via vllm
 mdurl==0.1.2
@@ -250,6 +273,10 @@ ninja==1.13.0
     # via
     #   flashinfer-python
     #   vllm
+nnsight==0.6.2
+    # via nnterp
+nnterp==1.3.0
+    # via -r requirements.in
 numba==0.61.2
     # via vllm
 numpy==2.2.6
@@ -345,12 +372,16 @@ packaging==26.0
     #   trl
 pandas==3.0.1
     # via datasets
+parso==0.8.6
+    # via jedi
 partial-json-parser==0.2.1.1.post7
     # via vllm
 pathlib==1.0.1
     # via -r requirements.in
 peft==0.18.1
     # via -r requirements.in
+pexpect==4.9.0
+    # via ipython
 pillow==12.1.1
     # via
     #   mistral-common
@@ -362,6 +393,8 @@ prometheus-client==0.24.1
     #   vllm
 prometheus-fastapi-instrumentator==7.1.0
     # via vllm
+prompt-toolkit==3.0.52
+    # via ipython
 propcache==0.4.1
     # via
     #   aiohttp
@@ -376,6 +409,10 @@ psutil==7.2.2
     #   accelerate
     #   peft
     #   vllm
+ptyprocess==0.7.0
+    # via pexpect
+pure-eval==0.2.3
+    # via stack-data
 py-cpuinfo==9.0.0
     # via vllm
 pyarrow==23.0.1
@@ -396,6 +433,7 @@ pydantic==2.12.5
     #   mcp
     #   mistral-common
     #   model-hosting-container-standards
+    #   nnsight
     #   openai
     #   openai-harmony
     #   openrouter
@@ -414,7 +452,10 @@ pydantic-settings==2.13.1
     #   fastapi
     #   mcp
 pygments==2.19.2
-    # via rich
+    # via
+    #   ipython
+    #   ipython-pygments-lexers
+    #   rich
 pyjwt==2.11.0
     # via mcp
 python-dateutil==2.9.0.post0
@@ -424,12 +465,16 @@ python-dotenv==1.2.1
     #   -r requirements.in
     #   pydantic-settings
     #   uvicorn
+python-engineio==4.13.1
+    # via python-socketio
 python-json-logger==4.0.0
     # via vllm
 python-multipart==0.0.22
     # via
     #   fastapi
     #   mcp
+python-socketio==5.16.1
+    # via nnsight
 pyyaml==6.0.3
     # via
     #   -r requirements.in
@@ -464,12 +509,14 @@ requests==2.32.5
     #   gguf
     #   huggingface-hub
     #   mistral-common
+    #   python-socketio
     #   ray
     #   tiktoken
     #   transformers
     #   vllm
 rich==14.3.3
     # via
+    #   nnsight
     #   rich-toolkit
     #   typer
 rich-toolkit==0.19.7
@@ -500,6 +547,8 @@ setuptools==79.0.1
     #   vllm
 shellingham==1.5.4
     # via typer
+simple-websocket==1.1.0
+    # via python-engineio
 six==1.17.0
     # via
     #   python-dateutil
@@ -510,6 +559,8 @@ sniffio==1.3.1
     #   openai
 sse-starlette==3.3.2
     # via mcp
+stack-data==0.6.3
+    # via ipython
 starlette==0.52.1
     # via
     #   fastapi
@@ -531,12 +582,15 @@ tokenizers==0.22.2
     # via
     #   transformers
     #   vllm
+toml==0.10.2
+    # via nnsight
 torch==2.9.1
     # via
     #   -r requirements.in
     #   accelerate
     #   compressed-tensors
     #   flashinfer-python
+    #   nnsight
     #   peft
     #   torchaudio
     #   torchvision
@@ -557,10 +611,16 @@ tqdm==4.67.3
     #   peft
     #   transformers
     #   vllm
+traitlets==5.14.3
+    # via
+    #   ipython
+    #   matplotlib-inline
 transformers==4.57.6
     # via
     #   -r requirements.in
     #   compressed-tensors
+    #   nnsight
+    #   nnterp
     #   peft
     #   trl
     #   vllm
@@ -622,11 +682,19 @@ watchfiles==1.1.1
     # via
     #   uvicorn
     #   vllm
+wcwidth==0.6.0
+    # via prompt-toolkit
+websocket-client==1.9.0
+    # via python-socketio
 websockets==16.0
     # via uvicorn
+wsproto==1.3.2
+    # via simple-websocket
 xgrammar==0.1.29
     # via vllm
 xxhash==3.6.0
     # via datasets
 yarl==1.22.0
     # via aiohttp
+zstandard==0.25.0
+    # via nnsight

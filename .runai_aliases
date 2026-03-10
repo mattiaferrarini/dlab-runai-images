@@ -37,6 +37,20 @@ rs() {
     runai_context submit -i ghcr.io/jkminder/dlab-runai-images/pytorch:master --pvc "$pvc_name:/mnt" "$@"
 }
 
+rs_cpu() {
+    if [ $# -lt 3 ]; then
+        echo "Usage: rs_cpu <cpu-count> <job-name> <command...>"
+        return 1
+    fi
+
+    local cpu_count="$1"
+    shift
+    local job_name="$1"
+    shift
+
+    rs --cpu "$cpu_count" "$job_name" -- "$@"
+}
+
 rs_gen() {
     local pvc_name
     if [ "$RUNAI_CURRENT_CTX" = "rcp" ]; then
@@ -90,6 +104,25 @@ rs_uni() {
     runai_context submit -i ghcr.io/mattiaferrarini/dlab-runai-images/unified:master \
         --pvc "$pvc_name:/mnt" \
         -g 1.0 \
+        "$job_name" \
+        -- "cd understanding-weird-generalizations && $*"
+}
+
+rs_uni_4() {
+    local pvc_name
+    if [ "$RUNAI_CURRENT_CTX" = "rcp" ]; then
+        pvc_name="dlab-scratch"
+    else
+        pvc_name="runai-dlab-{GASPAR_NAME}-scratch" # Replace {GASPAR_NAME} if needed
+    fi
+
+    # The first argument is the job name
+    local job_name="$1"
+    shift # Remove the job name from the arguments list, leaving only the command to run
+
+    runai_context submit -i ghcr.io/mattiaferrarini/dlab-runai-images/unified:master \
+        --pvc "$pvc_name:/mnt" \
+        -g 4.0 \
         "$job_name" \
         -- "cd understanding-weird-generalizations && $*"
 }
