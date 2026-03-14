@@ -34,7 +34,7 @@ rs() {
     else
         pvc_name="runai-dlab-{GASPAR_NAME}-scratch"
     fi
-    runai_context submit -i ghcr.io/jkminder/dlab-runai-images/pytorch:master --pvc "$pvc_name:/mnt" "$@"
+    runai_context submit -i ghcr.io/mattiaferrarini/dlab-runai-images/unified:master --pvc "$pvc_name:/mnt" "$@"
 }
 
 rs_cpu() {
@@ -43,12 +43,23 @@ rs_cpu() {
         return 1
     fi
 
+    local pvc_name
+    if [ "$RUNAI_CURRENT_CTX" = "rcp" ]; then
+        pvc_name="dlab-scratch"
+    else
+        pvc_name="runai-dlab-{GASPAR_NAME}-scratch" # Replace {GASPAR_NAME} if needed
+    fi
+    
     local cpu_count="$1"
     shift
     local job_name="$1"
     shift
-
-    rs --cpu "$cpu_count" "$job_name" -- "$@"
+    
+    runai_context submit -i ghcr.io/mattiaferrarini/dlab-runai-images/generalizations:master \
+        --pvc "$pvc_name:/mnt" \
+        --cpu "$cpu_count" \
+        "$job_name" \
+        -- "cd understanding-weird-generalizations && $*"
 }
 
 rs_gen() {
