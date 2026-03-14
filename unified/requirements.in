@@ -15,3 +15,7 @@ tqdm
 pathlib
 asyncio
 nnterp
+matplotlib
+safetensors
+seaborn 
+numpy
