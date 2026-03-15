@@ -19,3 +19,6 @@ matplotlib
 safetensors
 seaborn 
 numpy
+joblib
+scikit-learn
+pandas
