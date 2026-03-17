@@ -38,9 +38,34 @@ rs() {
 }
 
 rs_cpu() {
-    if [ $# -lt 3 ]; then
-        echo "Usage: rs_cpu <cpu-count> <job-name> <command...>"
+    if [ $# -lt 2 ]; then
+        echo "Usage: rs_cpu <cpu-count> <job-name> [flags...] [-- <command...>]"
         return 1
+    fi
+
+    local cpu_count="$1"
+    shift
+    local job_name="$1"
+    shift
+
+    local in_cmd=0
+    local submit_args=()
+    local cmd_args=()
+
+    for arg in "$@"; do
+        if [ "$in_cmd" -eq 1 ]; then
+            cmd_args+=("$arg")
+        elif [ "$arg" = "--" ]; then
+            in_cmd=1
+        else
+            submit_args+=("$arg")
+        fi
+    done
+
+    # If no '--' was provided, assume all remaining arguments are the command for backward compatibility
+    if [ "$in_cmd" -eq 0 ]; then
+        cmd_args=("${submit_args[@]}")
+        submit_args=()
     fi
 
     local pvc_name
@@ -50,16 +75,12 @@ rs_cpu() {
         pvc_name="runai-dlab-{GASPAR_NAME}-scratch" # Replace {GASPAR_NAME} if needed
     fi
     
-    local cpu_count="$1"
-    shift
-    local job_name="$1"
-    shift
-    
-    runai_context submit -i ghcr.io/mattiaferrarini/dlab-runai-images/generalizations:master \
+    runai_context submit -i ghcr.io/mattiaferrarini/dlab-runai-images/unified:master \
         --pvc "$pvc_name:/mnt" \
         --cpu "$cpu_count" \
+        "${submit_args[@]}" \
         "$job_name" \
-        -- "cd understanding-weird-generalizations && $*"
+        -- "cd understanding-weird-generalizations && ${cmd_args[*]}"
 }
 
 rs_gen() {
