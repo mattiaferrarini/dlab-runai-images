@@ -22,3 +22,4 @@ numpy
 joblib
 scikit-learn
 pandas
+scikit-dimension
