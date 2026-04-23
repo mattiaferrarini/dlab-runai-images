@@ -283,6 +283,8 @@ multidict==6.7.1
     #   yarl
 multiprocess==0.70.18
     # via datasets
+narwhals==2.20.0
+    # via plotly
 networkx==3.6.1
     # via torch
 ninja==1.13.0
@@ -393,6 +395,7 @@ packaging==26.0
     #   lm-format-enforcer
     #   matplotlib
     #   peft
+    #   plotly
     #   ray
     #   transformers
     #   trl
@@ -417,6 +420,8 @@ pillow==12.1.1
     #   mistral-common
     #   torchvision
     #   vllm
+plotly==6.7.0
+    # via -r requirements.in
 prometheus-client==0.24.1
     # via
     #   prometheus-fastapi-instrumentator

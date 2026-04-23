@@ -23,3 +23,4 @@ joblib
 scikit-learn
 pandas
 scikit-dimension
+plotly
