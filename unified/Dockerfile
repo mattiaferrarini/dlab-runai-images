@@ -4,6 +4,11 @@ FROM ${BASE_IMAGE}
 # Copy requirements
 COPY unified/requirements.txt /tmp/requirements.txt
 
+# ripserplusplus builds from source and invokes a system cmake binary.
+RUN apt-get update && \
+	apt-get install -y --no-install-recommends cmake && \
+	rm -rf /var/lib/apt/lists/*
+
 # Install dependencies directly into the base image's venv
 RUN uv pip install --no-cache -r /tmp/requirements.txt && \
     rm /tmp/requirements.txt
