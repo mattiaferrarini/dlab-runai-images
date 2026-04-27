@@ -77,8 +77,6 @@ cloudpickle==3.1.2
     # via
     #   nnsight
     #   vllm
-cmake==4.3.2
-    # via ripserplusplus
 compressed-tensors==0.13.0
     # via vllm
 contourpy==1.3.3
@@ -317,7 +315,6 @@ numpy==2.2.6
     #   opencv-python-headless
     #   pandas
     #   peft
-    #   ripserplusplus
     #   scikit-dimension
     #   scikit-learn
     #   scipy
@@ -567,8 +564,6 @@ rich-toolkit==0.19.7
     #   fastapi-cloud-cli
 rignore==0.7.6
     # via fastapi-cloud-cli
-ripserplusplus==1.1.2
-    # via -r requirements.in
 rpds-py==0.30.0
     # via
     #   jsonschema
@@ -587,7 +582,6 @@ scikit-learn==1.8.0
     #   scikit-dimension
 scipy==1.17.1
     # via
-    #   ripserplusplus
     #   scikit-dimension
     #   scikit-learn
 seaborn==0.13.2
